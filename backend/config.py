@@ -18,3 +18,7 @@ CORS_ORIGINS = os.getenv("CORS_ORIGINS", "*").split(",")
 LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO")
 LOG_DIR = Path(__file__).parent
 DIST_DIR = Path(__file__).parent.parent / "frontend" / "dist"
+
+UPLOADS_DIR = Path(__file__).parent / "uploads"
+UPLOADS_DIR.mkdir(exist_ok=True)
+MAX_UPLOAD_SIZE = 20 * 1024 * 1024  # 20 МБ

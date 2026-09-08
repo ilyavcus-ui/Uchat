@@ -125,6 +125,14 @@ export default function useMessages(user, api, updateLastMessageTime) {
     }
   }
 
+  const uploadFile = async (file) => {
+    const formData = new FormData()
+    formData.append('file', file)
+    formData.append('sender_id', user.id)
+    if (selectedUser?.id) formData.append('receiver_id', selectedUser.id)
+    await api('/api/messages/upload', { method: 'POST', body: formData })
+  }
+
   const sendTyping = (ws) => {
     if (ws) {
       ws.send(JSON.stringify({ type: 'typing', user_id: user.id, display_name: user.display_name }))
@@ -158,6 +166,6 @@ export default function useMessages(user, api, updateLastMessageTime) {
     unreadCounts, setUnreadCounts, totalUnread,
     newMessage, setNewMessage, messageSearchQuery, setMessageSearchQuery, filteredMessages,
     showEmojiPicker, setShowEmojiPicker, messagesEndRef,
-    fetchMessages, markAsRead, sendMessage, sendTyping, handleNewMessage
+    fetchMessages, markAsRead, sendMessage, uploadFile, sendTyping, handleNewMessage
   }
 }

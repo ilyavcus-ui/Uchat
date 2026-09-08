@@ -1,6 +1,6 @@
 import { useRef, useEffect } from 'react'
 
-export default function AutoResizeInput({ value, onChange, onKeyDown, onSubmit, placeholder, className, style, autoFocus }) {
+export default function AutoResizeInput({ value, onChange, onKeyDown, onSubmit, onPaste, placeholder, className, style, autoFocus }) {
   const ref = useRef(null)
 
   useEffect(() => {
@@ -26,6 +26,7 @@ export default function AutoResizeInput({ value, onChange, onKeyDown, onSubmit, 
       value={value}
       onChange={onChange}
       onKeyDown={handleKeyDown}
+      onPaste={onPaste}
       placeholder={placeholder}
       autoFocus={autoFocus}
       rows={1}

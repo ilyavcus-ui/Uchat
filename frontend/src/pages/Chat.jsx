@@ -271,6 +271,7 @@ export default function Chat() {
               newMessage={messagesHook.newMessage}
               setNewMessage={messagesHook.setNewMessage}
               sendMessage={messagesHook.sendMessage}
+              uploadFile={messagesHook.uploadFile}
               sendTyping={messagesHook.sendTyping}
               messagesEndRef={messagesHook.messagesEndRef}
               showEmojiPicker={messagesHook.showEmojiPicker}

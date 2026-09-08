@@ -13,8 +13,9 @@ export default function useApi() {
     setLoading(prev => ({ ...prev, [key]: true }))
     setGlobalError(null)
     try {
+      const isFormData = options.body instanceof FormData
       const res = await fetch(endpoint, {
-        headers: { 'Content-Type': 'application/json', ...options.headers },
+        headers: isFormData ? options.headers : { 'Content-Type': 'application/json', ...options.headers },
         ...options
       })
       if (!res.ok) {

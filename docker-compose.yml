@@ -29,9 +29,12 @@ services:
       PORT: 8001
       LOG_LEVEL: INFO
       CORS_ORIGINS: "*"
+    volumes:
+      - uploads_data:/app/backend/uploads
     depends_on:
       db:
         condition: service_healthy
 
 volumes:
   pgdata:
+  uploads_data:

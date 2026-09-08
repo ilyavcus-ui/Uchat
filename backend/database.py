@@ -85,6 +85,13 @@ async def _ensure_tables(conn):
             created_at TEXT NOT NULL
         )
     """)
+    # Вложения (картинки/файлы) — добавлены позже, поэтому через ADD COLUMN
+    # IF NOT EXISTS, чтобы не ломать уже существующие базы (миграционного
+    # инструмента в проекте нет, см. CLAUDE.md).
+    await conn.execute("ALTER TABLE messages ADD COLUMN IF NOT EXISTS file_name TEXT")
+    await conn.execute("ALTER TABLE messages ADD COLUMN IF NOT EXISTS stored_name TEXT")
+    await conn.execute("ALTER TABLE messages ADD COLUMN IF NOT EXISTS file_size INTEGER")
+    await conn.execute("ALTER TABLE messages ADD COLUMN IF NOT EXISTS mime_type TEXT")
     await conn.execute("""
         CREATE TABLE IF NOT EXISTS work_notifications (
             id SERIAL PRIMARY KEY,
